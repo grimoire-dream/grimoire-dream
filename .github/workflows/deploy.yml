@@ -1,0 +1,20 @@
+name: Deploy Website to Pinata
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Upload to Pinata
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Upload folder to Pinata
+        uses: anantaramdas/ipfs-pinata-deploy-action@v3.0.2
+        with:
+          path: ./        # Uploads all index.html, style.css, etc
+          pin-name: grimoire
+          pinata-api-key: ${{ secrets.PINATA_API_KEY }}
+          pinata-secret-api-key: ${{ secrets.PINATA_SECRET_API_KEY }}
